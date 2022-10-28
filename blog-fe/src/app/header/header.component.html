@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+  <div class="toolbar-content">
+    <div class="menu">
+      <span>Welcome user!</span>
+      <div class="menu-buttons">
+
+      </div>
+    </div>
+    <div class="login-buttons">
+      <button mat-raised-button color="basic" *ngIf="(accountService.currentUserSource | async) === null" routerLink="/login">Login</button>
+      <button mat-raised-button color="warn" *ngIf="accountService.currentUserSource | async" (click)="logout()">Logout</button>
+      <button mat-raised-button color="accent" *ngIf="(accountService.currentUserSource | async) === null" routerLink="/register">Register</button>
+    </div>
+  </div>
+</mat-toolbar>

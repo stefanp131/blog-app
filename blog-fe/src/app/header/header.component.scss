@@ -1,0 +1,22 @@
+button {
+  width: 8rem;
+}
+
+.toolbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  .menu {
+    .menu-buttons {
+      display: flex;
+      row-gap: 1.5rem;
+    }
+  }
+
+  .login-buttons {
+    display: flex;
+    gap: 1.5rem;
+  }
+}
