@@ -1,5 +1,14 @@
 <mat-card>
-  <mat-card-title>{{post.title}}</mat-card-title>
-  <mat-card-content>{{post.content}}</mat-card-content>
-  <mat-card-footer>{{post.category}}</mat-card-footer>
+  <mat-card-title>{{ post.title }}</mat-card-title>
+  <mat-card-content>{{ post.content }}</mat-card-content>
+  <mat-card-footer fxLayout="row" fxLayoutAlign="space-between center">
+    <div>
+      <i>Category: {{ post.category }}</i>
+    </div>
+    <div>
+      <b>Created By: {{ post.createdBy }}</b>
+      &nbsp;|&nbsp;
+      <i>Date created @ {{ post.dateCreated | date: 'dd/MM/yyyy' }}</i>
+    </div>
+  </mat-card-footer>
 </mat-card>

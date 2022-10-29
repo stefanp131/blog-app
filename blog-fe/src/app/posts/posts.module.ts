@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { PostComponent } from './post/post.component';
 import { CreateEditPostComponent } from './create-edit-post/create-edit-post.component';
 import { NgMaterialModule } from '../ng-material/ng-material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -15,7 +17,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [PostsListComponent, PostComponent, CreateEditPostComponent],
-  imports: [CommonModule, NgMaterialModule, RouterModule.forChild(routes), ],
+  imports: [CommonModule, NgMaterialModule, FlexLayoutModule, ReactiveFormsModule, RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class PostsModule {}

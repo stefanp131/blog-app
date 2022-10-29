@@ -1,0 +1,25 @@
+mat-expansion-panel {
+  width: 60rem;
+  margin: 1rem auto;
+
+  mat-panel-description {
+    margin: 0;
+    width: 100%;
+
+    mat-card{
+      width: 100%;
+    }
+  }
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.submit {
+  width: 100%;
+
+  button {
+    width: 18rem;    
+  }
+}

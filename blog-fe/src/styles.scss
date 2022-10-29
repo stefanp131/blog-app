@@ -10,3 +10,12 @@ html {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.background {
+  background-image: url("./assets/headspace.jpg");
+  //background-position: center center;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  //background-size: cover;
+  background-color: #464646;
+}
