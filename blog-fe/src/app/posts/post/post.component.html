@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card [routerLink]="[post.id, 'edit']" >
   <mat-card-title>{{ post.title }}</mat-card-title>
   <mat-card-content>{{ post.content }}</mat-card-content>
   <mat-card-footer fxLayout="row" fxLayoutAlign="space-between center">

@@ -7,17 +7,37 @@ import { CreateEditPostComponent } from './create-edit-post/create-edit-post.com
 import { NgMaterialModule } from '../ng-material/ng-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PostDetailsComponent } from './post-details/post-details.component';
 
 const routes: Routes = [
   {
     path: '',
     component: PostsListComponent,
   },
+  {
+    path: ':id',
+    component: PostDetailsComponent,
+  },
+  {
+    path: ':id/edit',
+    component: CreateEditPostComponent,
+  },
 ];
 
 @NgModule({
-  declarations: [PostsListComponent, PostComponent, CreateEditPostComponent],
-  imports: [CommonModule, NgMaterialModule, FlexLayoutModule, ReactiveFormsModule, RouterModule.forChild(routes)],
+  declarations: [
+    PostsListComponent,
+    PostComponent,
+    CreateEditPostComponent,
+    PostDetailsComponent,
+  ],
+  imports: [
+    CommonModule,
+    NgMaterialModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(routes),
+  ],
   exports: [RouterModule],
 })
 export class PostsModule {}

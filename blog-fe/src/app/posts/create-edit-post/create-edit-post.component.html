@@ -1,46 +1,57 @@
-<mat-expansion-panel>
-  <mat-expansion-panel-header> Create post </mat-expansion-panel-header>
+<mat-expansion-panel *ngIf="!editPost; else edit">
+  <mat-expansion-panel-header>
+    Create post
+  </mat-expansion-panel-header>
   <mat-panel-description>
-    <mat-card>
-      <mat-card-content>
-        <form
-          [formGroup]="createEditPostForm"
-          fxLayout="column"
-          autocomplete="off"
-          (ngSubmit)="createEditPostForm.valid && create()"
-        >
-          <mat-form-field appearance="outline" color="accent">
-            <mat-label>Title</mat-label>
-            <input formControlName="title" matInput placeholder="Title" />
-          </mat-form-field>
-          <mat-form-field appearance="outline" color="accent">
-            <mat-label>Category</mat-label>
-            <input formControlName="category" matInput placeholder="Category" />
-          </mat-form-field>
-          <mat-form-field appearance="outline" color="accent">
-            <mat-label>Content</mat-label>
-            <textarea formControlName="content" matInput cols="4"> </textarea>
-          </mat-form-field>
-          <div class="submit" fxLayoutAlign="center center">
-            <button
-              mat-raised-button
-              color="accent"
-              [disabled]="!createEditPostForm.valid"
-            >
-              Create
-            </button>
-          </div>
-        </form>
-      </mat-card-content>
-
-      <mat-card-footer>
-        <div fxLayout="column" fxLayoutAlign="center center">
-          <mat-error
-            *ngIf="!createEditPostForm.valid && createEditPostForm.dirty"
-            >Fields are required!</mat-error
-          >
-        </div>
-      </mat-card-footer>
-    </mat-card>
+    <ng-container *ngTemplateOutlet="edit"> </ng-container>
   </mat-panel-description>
 </mat-expansion-panel>
+<ng-template #edit>
+  <mat-card [ngClass]="{ editForm: editPost }">
+    <mat-card-subtitle *ngIf="editPost"> Update post </mat-card-subtitle>
+    <mat-card-content>
+      <form
+        *ngIf="createEditPostForm"
+        [formGroup]="createEditPostForm"
+        fxLayout="column"
+        autocomplete="off"
+        (ngSubmit)="createEditPostForm.valid && submit()"
+      >
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Title</mat-label>
+          <input formControlName="title" matInput placeholder="Title" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Category</mat-label>
+          <input formControlName="category" matInput placeholder="Category" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Content</mat-label>
+          <textarea formControlName="content" matInput cols="4"> </textarea>
+        </mat-form-field>
+        <div class="submit" fxLayoutAlign="center center">
+          <button
+            mat-raised-button
+            color="accent"
+            [disabled]="!createEditPostForm.valid"
+          >
+            {{ editPost ? "Update" : "Create" }}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+
+    <mat-card-footer>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <mat-error
+          *ngIf="
+            createEditPostForm &&
+            !createEditPostForm.valid &&
+            createEditPostForm.dirty
+          "
+          >Fields are required!</mat-error
+        >
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</ng-template>

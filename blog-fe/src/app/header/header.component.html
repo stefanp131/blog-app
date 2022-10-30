@@ -1,9 +1,9 @@
 <mat-toolbar color="primary">
   <div class="toolbar-content">
-    <div class="menu">
-      <span>Welcome {{ accountService.currentUserSource.value.username }}!</span>
-      <div class="menu-buttons">
-
+    <div class="menu" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1.5rem">
+      <span routerLink="" class="welcome-message">Welcome {{ accountService.currentUserSource.value.username }}!</span>
+      <div class="menu-buttons" fxLayout="row">
+        <button mat-raised-button color="accent" *ngIf="accountService.currentUserSource | async" routerLink="/posts">Posts</button>
       </div>
     </div>
     <div class="login-buttons">
