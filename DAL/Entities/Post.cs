@@ -15,7 +15,9 @@ public class Post : BaseEntity
     [Required]
     public DateTime DateCreated { get; set; }
     [Required]
-    public string CreatedBy { get; set; }
+    public DateTime LastUpdated { get; set; }
+    [Required]
+    public string Summary { get; set; }
     [Required]
     public string Category { get; set; }
     public ICollection<Commentary> Commentaries { get; set; }

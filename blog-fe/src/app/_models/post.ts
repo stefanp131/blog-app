@@ -5,7 +5,8 @@ export interface Post {
  title: string;
  content: string;
  dateCreated: Date;
- createdBy: string;
+ summary: string;
+ lastUpdated: string;
  category: string;
  commentaries: Commentary[]
 }

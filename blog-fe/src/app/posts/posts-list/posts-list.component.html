@@ -1,9 +1,17 @@
-<app-create-edit-post>
-  
-</app-create-edit-post>
-<mat-card>
+<app-create-edit-post> </app-create-edit-post>
+<mat-card class="posts-container">
   <mat-card-title> Hello fellas, here are your posts! </mat-card-title>
   <mat-card-content>
-    <app-post *ngFor="let post of $posts | async" [post]="post"> </app-post>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let post of $posts | async">
+        <mat-expansion-panel-header>
+          {{ post.title }}
+        </mat-expansion-panel-header>
+        <mat-panel-description>
+          <app-post [post]="post"></app-post>
+        </mat-panel-description>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <app-post> </app-post>
   </mat-card-content>
 </mat-card>

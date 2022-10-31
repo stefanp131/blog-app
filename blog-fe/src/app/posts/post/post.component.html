@@ -1,14 +1,24 @@
-<mat-card [routerLink]="[post.id]" >
-  <mat-card-title>{{ post.title }}</mat-card-title>
-  <mat-card-content>{{ post.content }}</mat-card-content>
+<mat-card *ngIf="post">
+  <mat-card-content>{{ post.summary }}</mat-card-content>
   <mat-card-footer fxLayout="row" fxLayoutAlign="space-between center">
-    <div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap=".5rem">
+      <button
+        mat-raised-button
+        color="accent"
+        [routerLink]="[post.id, 'details']"
+        [matTooltip]="'Go to post details'"
+      >
+        <mat-icon>open_in_new</mat-icon>
+      </button>
+      <button mat-raised-button color="accent" [routerLink]="[post.id]" [matTooltip]="'Edit post'">
+        <mat-icon>edit</mat-icon>
+      </button>
       <i>Category: {{ post.category }}</i>
     </div>
     <div>
-      <b>Created By: {{ post.createdBy }}</b>
+      <i>Last updated @ {{ post.lastUpdated | date: "dd/MM/yyyy" }}</i>
       &nbsp;|&nbsp;
-      <i>Date created @ {{ post.dateCreated | date: 'dd/MM/yyyy' }}</i>
+      <i>Date created @ {{ post.dateCreated | date: "dd/MM/yyyy" }}</i>
     </div>
   </mat-card-footer>
 </mat-card>
