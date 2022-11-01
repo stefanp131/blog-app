@@ -5,10 +5,11 @@ namespace DAL.Entities;
 
 public class Commentary : BaseEntity
 {
-    public Post Post { get; set; }
-    public int PostId { get; set; }
-    [Required]    
-    public string CreatedBy { get; set; }
+    
+    public Post ForPost { get; set; }
+    public int ForPostId { get; set; }
+    public AppUser CreatedBy { get; set; }
+    public int CreatedById { get; set; }
     [Required]
     [MaxLength(200)]
     public string Title { get; set; }

@@ -10,7 +10,7 @@ public class Post : BaseEntity
     [MaxLength(200)]
     public string Title { get; set; }
     [Required]
-    [MaxLength(500)]
+    [MaxLength(2000)]
     public string Content { get; set; }
     [Required]
     public DateTime DateCreated { get; set; }
