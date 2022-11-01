@@ -25,6 +25,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         this._context.Entry(entity).State = EntityState.Modified;
     }
 
+    public void Delete(T entity)
+    {
+        this._context.Set<T>().Remove(entity);
+    }
+
     public async Task<T> GetByIdAsync(int id)
     {
         return await this._context.Set<T>().FindAsync(id);

@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { concatMap } from 'rxjs';
 import { Post } from 'src/app/_models/post';
 import { AccountService } from 'src/app/_services/account.service';
 import { PostsService } from '../posts-service/posts.service';
@@ -16,6 +15,7 @@ export class CreateEditPostComponent implements OnInit {
   createEditPostForm: FormGroup;
   id: number;
   editPost: Post;
+  @Output() postCreated = new EventEmitter();
 
   constructor(
     private postsService: PostsService,
@@ -61,8 +61,7 @@ export class CreateEditPostComponent implements OnInit {
   submit() {
     if (!!this.id) {
       this.update();
-    }
-    else {
+    } else {
       this.create();
     }
   }
@@ -89,6 +88,7 @@ export class CreateEditPostComponent implements OnInit {
     this.postsService.createPost(createEditFormValue).subscribe({
       next: () => {
         this.snackBar.open('Post has been created!');
+        this.postCreated.emit();
       },
       error: () => this.snackBar.open('Something went wrong!'),
     });

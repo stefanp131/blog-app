@@ -29,4 +29,8 @@ export class PostsService {
   updatePostById(id: number, updatePost: UpdatePost) {
     return this.http.put(`${this.serviceUrl}/${id.toString()}`, updatePost);
   }
+
+  deletePostById(id: number) {
+    return this.http.delete(`${this.serviceUrl}/${id.toString()}`);
+  }
 }

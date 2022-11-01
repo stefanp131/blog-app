@@ -13,6 +13,9 @@
       <button mat-raised-button color="accent" [routerLink]="[post.id]" [matTooltip]="'Edit post'">
         <mat-icon>edit</mat-icon>
       </button>
+      <button mat-raised-button color="accent" (click)="delete()" [matTooltip]="'Delete post'">
+        <mat-icon>delete</mat-icon>
+      </button>
       <i>Category: {{ post.category }}</i>
     </div>
     <div>

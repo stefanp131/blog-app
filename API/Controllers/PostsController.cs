@@ -78,4 +78,24 @@ public class PostsController : BaseApiController
 
         return Ok();
     }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeletePost(int id)
+    {
+        var post = await _posts.GetByIdAsync(id);
+
+        if (post != null)
+        {
+            _posts.Delete(post);
+        }
+        else
+        {
+            return NotFound();
+        }
+    
+        await _unitOfWork.Complete();
+
+        return NoContent();
+    }
+
 }
