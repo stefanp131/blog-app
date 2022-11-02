@@ -49,11 +49,22 @@
       <div fxLayout="column" fxLayoutAlign="center center">
         <mat-error
           *ngIf="
-            createEditPostForm &&
-            !createEditPostForm.valid &&
-            createEditPostForm.dirty
+            createEditPostForm 
+            && (createEditPostForm.get('title').errors?.['required'] 
+            || createEditPostForm.get('summary').errors?.['required'] 
+            || createEditPostForm.get('category').errors?.['required'] 
+            || createEditPostForm.get('content').errors?.['required']) 
+            && createEditPostForm.dirty
           "
-          >Fields are required!</mat-error
+          >Fields are required</mat-error
+        >
+        <mat-error
+          *ngIf="
+          createEditPostForm 
+          && createEditPostForm.get('content').errors?.['maxlength'] 
+          && createEditPostForm.dirty
+        "
+          >Maximum length for content is 2000 characters</mat-error
         >
       </div>
     </mat-card-footer>
