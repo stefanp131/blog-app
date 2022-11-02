@@ -6,14 +6,13 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard], },
+  { path: '', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   {
     path: 'posts',
     loadChildren: () =>
-      import('./posts/posts.module').then((m) => m.PostsModule),
-    canActivate: [AuthGuard],
+      import('./posts/posts.module').then((m) => m.PostsModule),    
   },
 ];
 
