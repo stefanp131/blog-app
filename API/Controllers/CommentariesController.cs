@@ -77,7 +77,7 @@ public class CommentariesController : BaseApiController
     }
     
     [HttpPatch("{id}")]
-    public async Task<ActionResult> UpdateCommentary(int id, [FromBody] ApproveCommentaryDto approveCommentaryDto)
+    public async Task<ActionResult> ApproveCommentary(int id, [FromBody] ApproveCommentaryDto approveCommentaryDto)
     {
         var commentary = await _commentaries.GetByIdAsync(id);
         _mapper.Map(approveCommentaryDto, commentary);
