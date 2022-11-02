@@ -12,10 +12,9 @@ public class PostDto
     [MaxLength(200)]
     public string Title { get; set; }
     [Required]
-    [MaxLength(200)]
+    [MaxLength(500)]
     public string Summary { get; set; }
     [Required]
-    [MaxLength(2000)]
     public string Content { get; set; }
     [Required]
     public DateTime DateCreated { get; set; }

@@ -1,6 +1,6 @@
 <mat-card *ngIf="post">
-  <span><i>Summary:</i><br></span>
-  <mat-card-content [innerHTML]="post.content"></mat-card-content>
+  <span><i>Summary:</i><br /></span>
+  <mat-card-content>{{ post.summary }}</mat-card-content>
   <mat-card-footer fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap=".5rem">
       <button
@@ -11,10 +11,20 @@
       >
         <mat-icon>open_in_new</mat-icon>
       </button>
-      <button mat-raised-button color="accent" [routerLink]="[post.id]" [matTooltip]="'Edit post'">
+      <button
+        mat-raised-button
+        color="accent"
+        [routerLink]="[post.id]"
+        [matTooltip]="'Edit post'"
+      >
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-raised-button color="accent" (click)="delete()" [matTooltip]="'Delete post'">
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="delete()"
+        [matTooltip]="'Delete post'"
+      >
         <mat-icon>delete</mat-icon>
       </button>
       <i>Category: {{ post.category }}</i>

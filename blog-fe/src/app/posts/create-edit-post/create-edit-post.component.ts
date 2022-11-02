@@ -67,6 +67,7 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
     this.createEditPostForm = this.formBuilder.group({
       title: ['', Validators.required],
       category: ['', Validators.required],
+      summary:['', Validators.required],
       content: [
         '',
         [
@@ -84,6 +85,7 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
         this.createEditPostForm = this.formBuilder.group({
           title: [this.editPost.title, Validators.required],
           category: [this.editPost.category, Validators.required],
+          summary:['', Validators.required],
           content: [
             JSON.parse(this.editPost.content),
             [
