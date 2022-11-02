@@ -1,14 +1,14 @@
-<mat-card *ngIf="post$ | async">
-  <mat-card-title> {{ (post$ | async).title }} </mat-card-title>
-  <mat-card-content>{{ (post$ | async).content }}</mat-card-content>
+<mat-card *ngIf="post">
+  <mat-card-title> {{post.title}}</mat-card-title>
+  <mat-card-content [innerHTML]="post.content"></mat-card-content>
   <mat-card-footer fxLayout="row" fxLayoutAlign="space-between center">
     <div>
-      <i>Category: {{ (post$ | async).category }}</i>
+      <i>Category: {{ post.category }}</i>
     </div>
     <div>
-      <i>Last updated @ {{ (post$ | async).lastUpdated | date: "dd/MM/yyyy" }}</i>
+      <i>Last updated @ {{ post.lastUpdated | date: "dd/MM/yyyy" }}</i>
       &nbsp;|&nbsp;
-      <i>Date created @ {{ (post$ | async).dateCreated | date: "dd/MM/yyyy" }}</i>
+      <i>Date created @ {{ post.dateCreated | date: "dd/MM/yyyy" }}</i>
     </div>
   </mat-card-footer>
 </mat-card>

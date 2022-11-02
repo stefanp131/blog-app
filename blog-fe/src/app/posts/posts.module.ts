@@ -8,6 +8,8 @@ import { NgMaterialModule } from '../ng-material/ng-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { NgxEditorModule } from 'ngx-editor';
+import { config } from './ngx-editor-config/config';
 
 const routes: Routes = [
   {
@@ -36,6 +38,7 @@ const routes: Routes = [
     NgMaterialModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    NgxEditorModule.forChild(config),
     RouterModule.forChild(routes),
   ],
   exports: [RouterModule],

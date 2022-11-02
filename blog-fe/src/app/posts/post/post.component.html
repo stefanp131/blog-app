@@ -1,5 +1,6 @@
 <mat-card *ngIf="post">
-  <mat-card-content>{{ post.summary }}</mat-card-content>
+  <span><i>Summary:</i><br></span>
+  <mat-card-content [innerHTML]="post.content"></mat-card-content>
   <mat-card-footer fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap=".5rem">
       <button

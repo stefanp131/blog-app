@@ -1,5 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { toHTML } from 'ngx-editor';
 import { Post } from 'src/app/_models/post';
 import { PostsService } from '../posts-service/posts.service';
 
@@ -9,7 +18,16 @@ import { PostsService } from '../posts-service/posts.service';
   styleUrls: ['./post.component.scss'],
 })
 export class PostComponent implements OnInit {
-  @Input() post: Post;
+  private _post: Post;
+
+  @Input() set post(value: Post) {
+    this._post = value;
+    this.getHTMLFromValue(this._post);
+  }
+
+  get post(): Post {
+    return this._post;
+  }
   @Output() postDeleted = new EventEmitter();
 
   constructor(
@@ -18,6 +36,10 @@ export class PostComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  getHTMLFromValue(post: Post) {
+    this._post.content = toHTML(JSON.parse(post.content));
+  }
 
   delete() {
     this.postsService.deletePostById(this.post.id).subscribe({

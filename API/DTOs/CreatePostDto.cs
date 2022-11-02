@@ -9,7 +9,9 @@ public class CreatePostDto
     [MaxLength(200, ErrorMessage = "Maximum length for a title is 200!")]
     public string Title { get; set; }
     [Required]
-    [MaxLength(2000, ErrorMessage = "Maximum length for a title is 500!")]
+    [MaxLength(200, ErrorMessage = "Maximum length for a summary is 200!")]
+    public string Summary { get; set; }
+    [Required]
     public string Content { get; set; }
     [Required]
     public DateTime DateCreated { get; set; }

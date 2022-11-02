@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { toHTML } from 'ngx-editor';
+import { map, Observable } from 'rxjs';
 import { Post } from 'src/app/_models/post';
 import { PostsService } from '../posts-service/posts.service';
 
@@ -11,7 +12,7 @@ import { PostsService } from '../posts-service/posts.service';
 })
 export class PostDetailsComponent implements OnInit {
   id: number;
-  post$: Observable<Post>;
+  post: Post;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -22,6 +23,9 @@ export class PostDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.post$ = this.postsService.getPostById(this.id);
+    this.postsService.getPostById(this.id).subscribe((post) => {
+      this.post = post;
+      this.post.content = toHTML(JSON.parse(post.content));
+    });
   }
 }

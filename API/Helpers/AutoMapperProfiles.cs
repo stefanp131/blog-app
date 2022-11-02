@@ -11,10 +11,8 @@ public class AutoMapperProfiles : Profile
     {   
         CreateMap<RegisterDto, AppUser>();
         CreateMap<CreatePostDto, Post>()
-            .ForMember(d =>d.LastUpdated, o => o.MapFrom((src => DateTime.Now)))
-            .ForMember(d=>d.Summary, o => o.MapFrom(src => src.Content.Substring(0,Math.Min(src.Content.Length, 200))));
+            .ForMember(d => d.LastUpdated, o => o.MapFrom((src => DateTime.Now)));
         CreateMap<UpdatePostDto, Post>()
-            .ForMember(d =>d.LastUpdated, o => o.MapFrom((src => DateTime.Now)))
-            .ForMember(d=>d.Summary, o => o.MapFrom(src => src.Content.Substring(0,Math.Min(src.Content.Length, 200))));;
+            .ForMember(d => d.LastUpdated, o => o.MapFrom((src => DateTime.Now)));
     }
 }

@@ -25,10 +25,10 @@
           <mat-label>Category</mat-label>
           <input formControlName="category" matInput placeholder="Category" />
         </mat-form-field>
-        <mat-form-field appearance="outline" color="accent">
-          <mat-label>Content</mat-label>
-          <textarea formControlName="content" matInput cols="4"> </textarea>
-        </mat-form-field>
+        <div class="NgxEditor__Wrapper">
+          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+          <ngx-editor [editor]="editor" formControlName="content"> </ngx-editor>
+        </div>
         <div class="submit" fxLayoutAlign="center center">
           <button
             mat-raised-button

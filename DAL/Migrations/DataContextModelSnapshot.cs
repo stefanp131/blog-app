@@ -155,7 +155,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("ForPostId");
 
-                    b.ToTable("Commentaries");
+                    b.ToTable("Commentaries", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Entities.Post", b =>
@@ -190,7 +190,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
