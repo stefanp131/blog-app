@@ -1,5 +1,5 @@
 <mat-card *ngIf="post">
-  <mat-card-title> {{post.title}}</mat-card-title>
+  <mat-card-title> {{ post.title }}</mat-card-title>
   <mat-card-content [innerHTML]="post.content"></mat-card-content>
   <mat-card-footer fxLayout="row" fxLayoutAlign="space-between center">
     <div>
@@ -12,3 +12,5 @@
     </div>
   </mat-card-footer>
 </mat-card>
+
+<app-commentary-list *ngIf="post" [postId]="post.id"> </app-commentary-list>

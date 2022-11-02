@@ -1,0 +1,8 @@
+
+<app-create-commentary *ngIf="postId" [postId]="postId" (commentaryCreated)="getCommentariesPerPostList()"></app-create-commentary>
+<mat-card *ngIf="postId">
+  <mat-card-title>Commentaries</mat-card-title>
+  <mat-card-content>
+    <app-commentary *ngFor="let commentary of commentaries$ | async" [commentary]="commentary"></app-commentary>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,50 @@
+<mat-card *ngIf="postId">
+  <mat-card-subtitle>Write your opinion</mat-card-subtitle>
+  <mat-card-content>
+    <form
+      *ngIf="createCommentaryForm"
+      [formGroup]="createCommentaryForm"
+      fxLayout="column"
+      autocomplete="off"
+      (ngSubmit)="createCommentaryForm.valid && submit()"
+    >
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput placeholder="Title" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label
+          >Your comment ({{
+            createCommentaryForm.get("content").value?.length || '0'
+          }}
+          / 500)</mat-label
+        >
+        <textarea formControlName="content" matInput cols="4" maxlength="500">
+        </textarea>
+      </mat-form-field>
+      <div class="submit" fxLayoutAlign="center center">
+        <button
+          mat-raised-button
+          color="accent"
+          [disabled]="!createCommentaryForm.valid"
+        >
+          Create
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+
+  <mat-card-footer>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <mat-error
+        *ngIf="
+          createCommentaryForm 
+          && (createCommentaryForm.get('title').errors?.['required'] 
+          || createCommentaryForm.get('content').errors?.['required']) 
+          && createCommentaryForm.dirty
+        "
+        >Fields are required</mat-error
+      >
+    </div>
+  </mat-card-footer>
+</mat-card>

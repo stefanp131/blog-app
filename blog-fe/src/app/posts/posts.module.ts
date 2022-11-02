@@ -10,6 +10,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { config } from './ngx-editor-config/config';
+import { CommentaryListComponent } from './commentaries/commentary-list/commentary-list.component';
+import { CommentaryComponent } from './commentaries/commentary/commentary.component';
+import { CreateCommentaryComponent } from './commentaries/create-commentary/create-commentary.component';
 
 const routes: Routes = [
   {
@@ -32,6 +35,9 @@ const routes: Routes = [
     PostComponent,
     CreateEditPostComponent,
     PostDetailsComponent,
+    CommentaryListComponent,
+    CommentaryComponent,
+    CreateCommentaryComponent,
   ],
   imports: [
     CommonModule,

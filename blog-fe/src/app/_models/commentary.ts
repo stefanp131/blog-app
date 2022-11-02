@@ -1,7 +1,9 @@
 export interface Commentary {
   id: number;
+  approved: boolean;
   title: string;
   content: string;
   dateCreated: Date;
-  createdBy: string
+  lastUpdated: Date;
+  createdBy: number;
 }

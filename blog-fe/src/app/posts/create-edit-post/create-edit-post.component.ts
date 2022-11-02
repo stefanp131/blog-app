@@ -42,7 +42,6 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
     private postsService: PostsService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private accountService: AccountService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -126,13 +125,13 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
     const createEditFormValue: CreatePost = {
       ...this.createEditPostForm.value,
       dateCreated: new Date(Date.now()),
-      createdBy: this.accountService.currentUserSource.value.username,
     };
 
     createEditFormValue.content = JSON.stringify(toDoc(createEditFormValue.content));
 
     this.postsService.createPost(createEditFormValue).subscribe({
       next: () => {
+        this.createEditPostForm.reset();
         this.snackBar.open('Post has been created!');
         this.postCreated.emit();
       },

@@ -26,7 +26,7 @@
           <input formControlName="category" matInput placeholder="Category" />
         </mat-form-field>
         <mat-form-field appearance="outline" color="accent">
-          <mat-label>Summary ({{createEditPostForm.get('summary').value.length}} / 500)</mat-label>
+          <mat-label>Summary ({{createEditPostForm.get('summary').value?.length || '0'}} / 500)</mat-label>
           <textarea formControlName="summary" matInput cols="4" maxlength="500"> </textarea>
         </mat-form-field>
         <div class="NgxEditor__Wrapper">

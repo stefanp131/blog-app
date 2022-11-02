@@ -37,7 +37,7 @@ public class PostsController : BaseApiController
             posts = await _posts.ListAllAsync();
         }
         
-        var postDtos = _mapper.Map<IReadOnlyCollection<Post>>(posts);
+        var postDtos = _mapper.Map<IReadOnlyCollection<PostDto>>(posts);
 
         return Ok(postDtos);
     }

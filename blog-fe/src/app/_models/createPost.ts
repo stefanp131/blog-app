@@ -3,4 +3,5 @@ export interface CreatePost{
   content: string;
   dateCreated: Date;
   category: string;
+  summary: string;
 }

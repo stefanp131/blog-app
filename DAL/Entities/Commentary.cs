@@ -10,6 +10,7 @@ public class Commentary : BaseEntity
     public int ForPostId { get; set; }
     public AppUser CreatedBy { get; set; }
     public int CreatedById { get; set; }
+    public bool Approved { get; set; }
     [Required]
     [MaxLength(200)]
     public string Title { get; set; }
@@ -18,4 +19,6 @@ public class Commentary : BaseEntity
     public string Content { get; set; }
     [Required]
     public DateTime DateCreated { get; set; }
+    [Required]
+    public DateTime LastUpdated { get; set; }
 }
