@@ -30,9 +30,9 @@
       <i>Category: {{ post.category }}</i>
     </div>
     <div>
-      <i>Last updated @ {{ post.lastUpdated | date: "dd/MM/yyyy" }}</i>
+      <i>Last updated @ {{ post.lastUpdated | date: "dd/MM/yyyy h:mm a" }}</i>
       &nbsp;|&nbsp;
-      <i>Date created @ {{ post.dateCreated | date: "dd/MM/yyyy" }}</i>
+      <i>Date created @ {{ post.dateCreated | date: "dd/MM/yyyy h:mm a" }}</i>
     </div>
   </mat-card-footer>
 </mat-card>

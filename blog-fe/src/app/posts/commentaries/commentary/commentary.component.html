@@ -49,9 +49,9 @@
       </button>
     </div>
     <div>
-      <i>Last updated @ {{ commentary.lastUpdated | date: "dd/MM/yyyy" }}</i>
+      <i>Last updated @ {{ commentary.lastUpdated | date: "dd/MM/yyyy h:mm a" }}</i>
       &nbsp;|&nbsp;
-      <i>Date created @ {{ commentary.dateCreated | date: "dd/MM/yyyy" }}</i>
+      <i>Date created @ {{ commentary.dateCreated | date: "dd/MM/yyyy h:mm a" }}</i>
     </div>
   </mat-card-footer>
   <div *ngIf="showForm">

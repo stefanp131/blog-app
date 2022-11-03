@@ -60,7 +60,8 @@ export class CommentaryComponent implements OnInit {
       .subscribe({
         next: () => {
           this.commentary.approved = !this.commentary.approved;
-          this.snackBar.open('Commentary has been approved', 'Dismiss', {
+          const message = 'Commentary has been ' + (this.commentary.approved ? 'approved' : 'rejected');
+          this.snackBar.open(message, 'Dismiss', {
             duration: 5000,
           });
         },
