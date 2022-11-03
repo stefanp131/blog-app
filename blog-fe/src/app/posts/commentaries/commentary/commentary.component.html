@@ -1,15 +1,52 @@
 <mat-card *ngIf="commentary">
-  <mat-card-subtitle>
+  <mat-card-subtitle *ngIf="!showForm">
     <i>{{ commentary.createdBy }} wrote:</i>
   </mat-card-subtitle>
-  <mat-card-content>
+  <mat-card-content *ngIf="!showForm">
     <b>{{ commentary.title }}</b>
     <br />
     {{ commentary.content }}
   </mat-card-content>
-  <mat-card-footer fxLayout="row" fxLayoutAlign="space-between center">
+  <mat-card-footer
+    *ngIf="!showForm"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+  >
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap=".5rem">
-      <span>Actions</span>
+      <button
+        *ngIf="!commentary.approved"
+        mat-raised-button
+        color="accent"
+        [matTooltip]="'Approve commentary'"
+        (click)="toggleApprove()"
+      >
+        <mat-icon>check_circle</mat-icon>
+      </button>
+      <button
+        *ngIf="commentary.approved"
+        (click)="toggleApprove()"
+        mat-raised-button
+        color="accent"
+        [matTooltip]="'Reject commentary'"
+      >
+        <mat-icon>remove_circle</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="initEditForm()"
+        [matTooltip]="'Edit commentary'"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="delete()"
+        [matTooltip]="'Delete post'"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
     <div>
       <i>Last updated @ {{ commentary.lastUpdated | date: "dd/MM/yyyy" }}</i>
@@ -17,4 +54,45 @@
       <i>Date created @ {{ commentary.dateCreated | date: "dd/MM/yyyy" }}</i>
     </div>
   </mat-card-footer>
+  <div *ngIf="showForm">
+    <form
+      *ngIf="commentaryEditForm"
+      [formGroup]="commentaryEditForm"
+      fxLayout="column"
+      autocomplete="off"
+      (ngSubmit)="commentaryEditForm.valid && submit()"
+    >
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput placeholder="Title" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label
+          >Your comment ({{
+            commentaryEditForm.get("content").value?.length || "0"
+          }}
+          / 500)</mat-label
+        >
+        <textarea formControlName="content" matInput cols="4" maxlength="500">
+        </textarea>
+      </mat-form-field>
+      <div class="submit" fxLayoutAlign="center center" fxLayoutGap="1.5rem">
+        <button
+          mat-raised-button
+          color="accent"
+          [disabled]="!commentaryEditForm.valid"
+        >
+          Update
+        </button>
+        <button
+          type="button"
+          mat-raised-button
+          color="accent"
+          (click)="cancelForm()"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
 </mat-card>

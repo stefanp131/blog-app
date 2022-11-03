@@ -11,6 +11,4 @@ public class UpdateCommentaryDto
     [Required]
     [MaxLength(500)]
     public string Content { get; set; }
-    public int CreatedById { get; set; }
-
 }

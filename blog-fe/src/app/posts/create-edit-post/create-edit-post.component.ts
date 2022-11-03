@@ -66,7 +66,7 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
     this.createEditPostForm = this.formBuilder.group({
       title: ['', Validators.required],
       category: ['', Validators.required],
-      summary:['', Validators.required],
+      summary: ['', Validators.required],
       content: [
         '',
         [
@@ -84,7 +84,7 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
         this.createEditPostForm = this.formBuilder.group({
           title: [this.editPost.title, Validators.required],
           category: [this.editPost.category, Validators.required],
-          summary:['', Validators.required],
+          summary: ['', Validators.required],
           content: [
             JSON.parse(this.editPost.content),
             [
@@ -106,19 +106,24 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
   }
 
   private update() {
-    const createEditFormValue: UpdatePost = {...this.createEditPostForm.value};
+    const createEditFormValue: UpdatePost = {
+      ...this.createEditPostForm.value,
+    };
 
     createEditFormValue.content = JSON.stringify(createEditFormValue.content);
 
-    this.postsService
-      .updatePostById(this.id, createEditFormValue)
-      .subscribe({
-        next: () => {
-          this.router.navigate(['/posts']);
-          this.snackBar.open('Post has been updated!');
-        },
-        error: () => this.snackBar.open('Something went wrong!'),
-      });
+    this.postsService.updatePostById(this.id, createEditFormValue).subscribe({
+      next: () => {
+        this.router.navigate(['/posts']);
+        this.snackBar.open('Post has been updated!', 'Dismiss', {
+          duration: 5000,
+        });
+      },
+      error: () =>
+        this.snackBar.open('Something went wrong!', 'Dismiss', {
+          duration: 5000,
+        }),
+    });
   }
 
   create() {
@@ -127,15 +132,22 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
       dateCreated: new Date(Date.now()),
     };
 
-    createEditFormValue.content = JSON.stringify(toDoc(createEditFormValue.content));
+    createEditFormValue.content = JSON.stringify(
+      toDoc(createEditFormValue.content)
+    );
 
     this.postsService.createPost(createEditFormValue).subscribe({
       next: () => {
         this.createEditPostForm.reset();
-        this.snackBar.open('Post has been created!');
+        this.snackBar.open('Post has been created!', 'Dismiss', {
+          duration: 5000,
+        });
         this.postCreated.emit();
       },
-      error: () => this.snackBar.open('Something went wrong!'),
+      error: () =>
+        this.snackBar.open('Something went wrong!', 'Dismiss', {
+          duration: 5000,
+        }),
     });
   }
 }

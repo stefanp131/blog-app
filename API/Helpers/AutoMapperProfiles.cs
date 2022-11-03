@@ -20,6 +20,7 @@ public class AutoMapperProfiles : Profile
             .ForMember(d => d.LastUpdated, o => o.MapFrom((src => DateTime.Now)));
         CreateMap<UpdateCommentaryDto, Commentary>()
             .ForMember(d => d.LastUpdated, o => o.MapFrom((src => DateTime.Now)));
-        CreateMap<ApproveCommentaryDto, Commentary>();
+        CreateMap<ApproveCommentaryDto, Commentary>()
+            .ForMember(d => d.LastUpdated, o => o.MapFrom((src => DateTime.Now)));
     }
 }

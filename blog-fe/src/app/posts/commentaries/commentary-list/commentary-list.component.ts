@@ -27,8 +27,8 @@ export class CommentaryListComponent implements OnInit {
       .getCommentariesPerPost(this.postId)
       .pipe(
         map((list) => {
-          if (!this.accountService.currentUserSource.value.roles.includes('admin')) {
-            return list.filter((com) => !com.approved);
+          if (!this.accountService.currentUserSource.value.roles.includes('Admin')) {
+            return list.filter((com) => com.approved);
           }
 
           return list;

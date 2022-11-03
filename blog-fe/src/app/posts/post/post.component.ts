@@ -45,10 +45,14 @@ export class PostComponent implements OnInit {
     this.postsService.deletePostById(this.post.id).subscribe({
       next: () => {
         this.postDeleted.emit();
-        this.snackBar.open('Post has been deleted');
+        this.snackBar.open('Post has been deleted', 'Dismiss', {
+          duration: 5000,
+        });
       },
       error: () => {
-        this.snackBar.open('Something went wrong');
+        this.snackBar.open('Something went wrong', 'Dismiss', {
+          duration: 5000,
+        });
       },
     });
   }

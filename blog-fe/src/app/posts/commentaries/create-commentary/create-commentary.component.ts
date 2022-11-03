@@ -38,16 +38,23 @@ export class CreateCommentaryComponent implements OnInit {
       ...this.createCommentaryForm.value,
       dateCreated: new Date(Date.now()),
       forPostId: this.postId,
-      createdById: this.accountService.currentUserSource.value.id
+      createdById: this.accountService.currentUserSource.value.id,
     };
 
-    this.commentariesService.createCommentaryForPost(createCommentaryFormValue).subscribe({
-      next: () => {
-        this.createCommentaryForm.reset();
-        this.snackBar.open('Commentary has been created!');
-        this.commentaryCreated.emit();
-      },
-      error: () => this.snackBar.open('Something went wrong!'),
-    });
+    this.commentariesService
+      .createCommentaryForPost(createCommentaryFormValue)
+      .subscribe({
+        next: () => {
+          this.createCommentaryForm.reset();
+          this.snackBar.open('Commentary has been created!', 'Dismiss', {
+            duration: 5000,
+          });
+          this.commentaryCreated.emit();
+        },
+        error: () =>
+          this.snackBar.open('Something went wrong!', 'Dismiss', {
+            duration: 5000,
+          }),
+      });
   }
 }
