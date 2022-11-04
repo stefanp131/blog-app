@@ -1,7 +1,5 @@
 <mat-expansion-panel *ngIf="!editPost; else edit">
-  <mat-expansion-panel-header>
-    Create post
-  </mat-expansion-panel-header>
+  <mat-expansion-panel-header> Create post </mat-expansion-panel-header>
   <mat-panel-description>
     <ng-container *ngTemplateOutlet="edit"> </ng-container>
   </mat-panel-description>
@@ -11,6 +9,7 @@
     <mat-card-subtitle *ngIf="editPost"> Update post </mat-card-subtitle>
     <mat-card-content>
       <form
+        #formDirective="ngForm"
         *ngIf="createEditPostForm"
         [formGroup]="createEditPostForm"
         fxLayout="column"
@@ -26,11 +25,18 @@
           <input formControlName="category" matInput placeholder="Category" />
         </mat-form-field>
         <mat-form-field appearance="outline" color="accent">
-          <mat-label>Summary ({{createEditPostForm.get('summary').value?.length || '0'}} / 500)</mat-label>
-          <textarea formControlName="summary" matInput cols="4" maxlength="500"> </textarea>
+          <mat-label
+            >Summary ({{
+              createEditPostForm.get("summary").value?.length || "0"
+            }}
+            / 500)</mat-label
+          >
+          <textarea formControlName="summary" matInput cols="4" maxlength="500">
+          </textarea>
         </mat-form-field>
         <div class="NgxEditor__Wrapper">
-          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+          </ngx-editor-menu>
           <ngx-editor [editor]="editor" formControlName="content"> </ngx-editor>
         </div>
         <div class="submit" fxLayoutAlign="center center">

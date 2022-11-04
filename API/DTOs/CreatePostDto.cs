@@ -16,7 +16,5 @@ public class CreatePostDto
     [Required]
     public DateTime DateCreated { get; set; }
     [Required]
-    public string CreatedBy { get; set; }
-    [Required]
     public string Category { get; set; }
 }

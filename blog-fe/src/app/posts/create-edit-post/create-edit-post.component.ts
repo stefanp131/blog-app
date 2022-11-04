@@ -4,6 +4,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -26,6 +27,7 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
   id: number;
   editPost: Post;
   @Output() postCreated = new EventEmitter();
+  @ViewChild('formDirective') formGroupDirective;
   editor: Editor;
   toolbar: Toolbar = [
     ['bold', 'italic'],
@@ -37,6 +39,7 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
+
 
   constructor(
     private postsService: PostsService,
@@ -113,7 +116,7 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
     createEditFormValue.content = JSON.stringify(createEditFormValue.content);
 
     this.postsService.updatePostById(this.id, createEditFormValue).subscribe({
-      next: () => {
+      next: () => {        
         this.router.navigate(['/posts']);
         this.snackBar.open('Post has been updated!', 'Dismiss', {
           duration: 5000,
@@ -138,7 +141,12 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
 
     this.postsService.createPost(createEditFormValue).subscribe({
       next: () => {
-        this.createEditPostForm.reset();
+        this.formGroupDirective.resetForm();
+
+        Object.keys(this.createEditPostForm.controls).forEach(key => {
+          this.createEditPostForm.controls[key].setErrors(null)
+        });
+
         this.snackBar.open('Post has been created!', 'Dismiss', {
           duration: 5000,
         });

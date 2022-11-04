@@ -86,7 +86,7 @@ export class CommentaryComponent implements OnInit {
         next: () => {
           this.commentaryEditForm.reset();
           this.showForm = false;
-          this.snackBar.open('Commentary has been created! Please await moderation from an admin', 'Dismiss', {
+          this.snackBar.open('Commentary has been updated!', 'Dismiss', {
             duration: 5000,
           });
           this.commentaryUpdated.emit();

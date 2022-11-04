@@ -1,5 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CreateCommentary } from 'src/app/_models/createCommentary';
 import { AccountService } from 'src/app/_services/account.service';
@@ -14,6 +25,7 @@ export class CreateCommentaryComponent implements OnInit {
   @Input() postId: number;
   @Output() commentaryCreated = new EventEmitter();
   createCommentaryForm: FormGroup;
+  @ViewChild('formDirective') formGroupDirective;
 
   constructor(
     private commentariesService: CommentariesService,
@@ -45,10 +57,15 @@ export class CreateCommentaryComponent implements OnInit {
       .createCommentaryForPost(createCommentaryFormValue)
       .subscribe({
         next: () => {
-          this.createCommentaryForm.reset();
-          this.snackBar.open('Commentary has been created!', 'Dismiss', {
-            duration: 5000,
-          });
+          this.formGroupDirective.resetForm();
+
+          this.snackBar.open(
+            'Commentary has been created! Please await moderation from an admin.',
+            'Dismiss',
+            {
+              duration: 5000,
+            }
+          );
           this.commentaryCreated.emit();
         },
         error: () =>
