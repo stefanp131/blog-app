@@ -5,5 +5,5 @@ export interface Commentary {
   content: string;
   dateCreated: Date;
   lastUpdated: Date;
-  createdBy: number;
+  createdBy: string;
 }

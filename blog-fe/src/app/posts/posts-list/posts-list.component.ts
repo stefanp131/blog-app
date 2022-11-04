@@ -14,7 +14,7 @@ export class PostsListComponent implements OnInit {
 
   constructor(
     private postsService: PostsService,
-    private accountService: AccountService
+    public accountService: AccountService
   ) {}
 
   ngOnInit(): void {

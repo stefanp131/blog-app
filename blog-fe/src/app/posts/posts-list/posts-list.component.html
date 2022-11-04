@@ -1,4 +1,4 @@
-<app-create-edit-post (postCreated)="getPosts()"> </app-create-edit-post>
+<app-create-edit-post *ngIf="accountService.currentUserSource.value.roles.includes('Admin')" (postCreated)="getPosts()"> </app-create-edit-post>
 <mat-card class="posts-container">
   <mat-card-title> Hello fellas, here are my posts! </mat-card-title>
   <mat-card-content>

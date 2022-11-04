@@ -14,7 +14,10 @@
   >
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap=".5rem">
       <button
-        *ngIf="!commentary.approved"
+        *ngIf="
+          accountService.currentUserSource.value.roles.includes('Admin') &&
+          !commentary.approved
+        "
         mat-raised-button
         color="accent"
         [matTooltip]="'Approve commentary'"
@@ -23,7 +26,10 @@
         <mat-icon>check_circle</mat-icon>
       </button>
       <button
-        *ngIf="commentary.approved"
+        *ngIf="
+          accountService.currentUserSource.value.roles.includes('Admin') &&
+          commentary.approved
+        "
         (click)="toggleApprove()"
         mat-raised-button
         color="accent"
@@ -32,6 +38,9 @@
         <mat-icon>remove_circle</mat-icon>
       </button>
       <button
+        *ngIf="
+          accountService.currentUserSource.value.username === commentary.createdBy
+        "
         mat-raised-button
         color="accent"
         (click)="initEditForm()"
@@ -40,6 +49,9 @@
         <mat-icon>edit</mat-icon>
       </button>
       <button
+        *ngIf="
+          accountService.currentUserSource.value.username === commentary.createdBy
+        "
         mat-raised-button
         color="accent"
         (click)="delete()"
@@ -49,9 +61,15 @@
       </button>
     </div>
     <div>
-      <i>Last updated @ {{ commentary.lastUpdated | date: "dd/MM/yyyy h:mm a" }}</i>
+      <i
+        >Last updated @
+        {{ commentary.lastUpdated | date: "dd/MM/yyyy h:mm a" }}</i
+      >
       &nbsp;|&nbsp;
-      <i>Date created @ {{ commentary.dateCreated | date: "dd/MM/yyyy h:mm a" }}</i>
+      <i
+        >Date created @
+        {{ commentary.dateCreated | date: "dd/MM/yyyy h:mm a" }}</i
+      >
     </div>
   </mat-card-footer>
   <div *ngIf="showForm">

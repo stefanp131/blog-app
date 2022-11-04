@@ -12,6 +12,7 @@
         <mat-icon>open_in_new</mat-icon>
       </button>
       <button
+        *ngIf="accountService.currentUserSource.value.roles.includes('Admin')"
         mat-raised-button
         color="accent"
         [routerLink]="[post.id]"
@@ -20,6 +21,7 @@
         <mat-icon>edit</mat-icon>
       </button>
       <button
+        *ngIf="accountService.currentUserSource.value.roles.includes('Admin')"
         mat-raised-button
         color="accent"
         (click)="delete()"

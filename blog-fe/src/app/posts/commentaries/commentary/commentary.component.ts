@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Commentary } from 'src/app/_models/commentary';
 import { UpdateCommentary } from 'src/app/_models/updateCommentary';
+import { AccountService } from 'src/app/_services/account.service';
 import { CommentariesService } from '../commentaries-service/commentaries.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class CommentaryComponent implements OnInit {
   constructor(
     private commentariesService: CommentariesService,
     private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public accountService: AccountService
   ) {}
 
   ngOnInit(): void {}
@@ -84,7 +86,7 @@ export class CommentaryComponent implements OnInit {
         next: () => {
           this.commentaryEditForm.reset();
           this.showForm = false;
-          this.snackBar.open('Commentary has been created!', 'Dismiss', {
+          this.snackBar.open('Commentary has been created! Please await moderation from an admin', 'Dismiss', {
             duration: 5000,
           });
           this.commentaryUpdated.emit();

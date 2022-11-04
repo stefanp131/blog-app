@@ -10,6 +10,7 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { toHTML } from 'ngx-editor';
 import { Post } from 'src/app/_models/post';
+import { AccountService } from 'src/app/_services/account.service';
 import { PostsService } from '../posts-service/posts.service';
 
 @Component({
@@ -32,7 +33,8 @@ export class PostComponent implements OnInit {
 
   constructor(
     private postsService: PostsService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public accountService: AccountService
   ) {}
 
   ngOnInit(): void {}
