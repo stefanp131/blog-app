@@ -8,14 +8,8 @@
   <mat-card [ngClass]="{ editForm: editPost }">
     <mat-card-subtitle *ngIf="editPost"> Update post </mat-card-subtitle>
     <mat-card-content>
-      <form
-        #formDirective="ngForm"
-        *ngIf="createEditPostForm"
-        [formGroup]="createEditPostForm"
-        fxLayout="column"
-        autocomplete="off"
-        (ngSubmit)="createEditPostForm.valid && submit()"
-      >
+      <form #formDirective="ngForm" *ngIf="createEditPostForm" [formGroup]="createEditPostForm" fxLayout="column"
+        autocomplete="off" (ngSubmit)="createEditPostForm.valid && submit()">
         <mat-form-field appearance="outline" color="accent">
           <mat-label>Title</mat-label>
           <input formControlName="title" matInput placeholder="Title" />
@@ -25,12 +19,7 @@
           <input formControlName="category" matInput placeholder="Category" />
         </mat-form-field>
         <mat-form-field appearance="outline" color="accent">
-          <mat-label
-            >Summary ({{
-              createEditPostForm.get("summary").value?.length || "0"
-            }}
-            / 500)</mat-label
-          >
+          <mat-label>Summary ({{ createEditPostForm.get("summary").value?.length || "0" }} / 500)</mat-label>
           <textarea formControlName="summary" matInput cols="4" maxlength="500">
           </textarea>
         </mat-form-field>
@@ -40,11 +29,7 @@
           <ngx-editor [editor]="editor" formControlName="content"> </ngx-editor>
         </div>
         <div class="submit" fxLayoutAlign="center center">
-          <button
-            mat-raised-button
-            color="accent"
-            [disabled]="!createEditPostForm.valid"
-          >
+          <button mat-raised-button color="accent" [disabled]="!createEditPostForm.valid">
             {{ editPost ? "Update" : "Create" }}
           </button>
         </div>
@@ -53,25 +38,15 @@
 
     <mat-card-footer>
       <div fxLayout="column" fxLayoutAlign="center center">
-        <mat-error
-          *ngIf="
-            createEditPostForm 
+        <mat-error *ngIf="createEditPostForm 
             && (createEditPostForm.get('title').errors?.['required'] 
             || createEditPostForm.get('summary').errors?.['required'] 
             || createEditPostForm.get('category').errors?.['required'] 
             || createEditPostForm.get('content').errors?.['required']) 
-            && createEditPostForm.dirty
-          "
-          >Fields are required</mat-error
-        >
-        <mat-error
-          *ngIf="
-          createEditPostForm 
+            && createEditPostForm.dirty">Fields are required</mat-error>
+        <mat-error *ngIf="createEditPostForm 
           && createEditPostForm.get('content').errors?.['maxlength'] 
-          && createEditPostForm.dirty
-        "
-          >Maximum length for content is 2000 characters</mat-error
-        >
+          && createEditPostForm.dirty">Maximum length for content is 2000 characters</mat-error>
       </div>
     </mat-card-footer>
   </mat-card>

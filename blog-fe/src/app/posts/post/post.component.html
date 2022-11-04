@@ -3,30 +3,15 @@
   <mat-card-content>{{ post.summary }}</mat-card-content>
   <mat-card-footer fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap=".5rem">
-      <button
-        mat-raised-button
-        color="accent"
-        [routerLink]="[post.id, 'details']"
-        [matTooltip]="'Go to post details'"
-      >
+      <button mat-raised-button color="accent" [routerLink]="[post.id, 'details']" [matTooltip]="'Go to post details'">
         <mat-icon>open_in_new</mat-icon>
       </button>
-      <button
-        *ngIf="accountService.currentUserSource.value.roles.includes('Admin')"
-        mat-raised-button
-        color="accent"
-        [routerLink]="[post.id]"
-        [matTooltip]="'Edit post'"
-      >
+      <button *ngIf="accountService.currentUserSource.value.roles.includes('Admin')" mat-raised-button color="accent"
+        [routerLink]="[post.id]" [matTooltip]="'Edit post'">
         <mat-icon>edit</mat-icon>
       </button>
-      <button
-        *ngIf="accountService.currentUserSource.value.roles.includes('Admin')"
-        mat-raised-button
-        color="accent"
-        (click)="delete()"
-        [matTooltip]="'Delete post'"
-      >
+      <button *ngIf="accountService.currentUserSource.value.roles.includes('Admin')" mat-raised-button color="accent"
+        (click)="delete()" [matTooltip]="'Delete post'">
         <mat-icon>delete</mat-icon>
       </button>
       <i>Category: {{ post.category }}</i>

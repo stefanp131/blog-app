@@ -1,17 +1,11 @@
-<app-create-commentary
-  *ngIf="postId"
-  [postId]="postId"
-  (commentaryCreated)="getCommentariesPerPostList()"
-></app-create-commentary>
+<app-create-commentary *ngIf="postId" [postId]="postId" (commentaryCreated)="getCommentariesPerPostList()">
+</app-create-commentary>
 <mat-card *ngIf="postId">
   <mat-card-title>Commentaries</mat-card-title>
   <mat-card-content>
-    <app-commentary
-      *ngFor="let commentary of commentaries$ | async"
-      [commentary]="commentary"
-      (commentaryUpdated)="getCommentariesPerPostList()"
-      (commentaryDeleted)="getCommentariesPerPostList()"
-    ></app-commentary>
+    <app-commentary *ngFor="let commentary of commentaries$ | async" [commentary]="commentary"
+      (commentaryUpdated)="getCommentariesPerPostList()" (commentaryDeleted)="getCommentariesPerPostList()">
+    </app-commentary>
   </mat-card-content>
   <mat-card-footer fxLayout="row" fxLayoutAlign="center center" *ngIf="postId && (commentaries$ | async)?.length === 0">
     <span> No commentaries yet</span>

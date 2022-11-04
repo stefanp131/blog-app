@@ -1,53 +1,26 @@
 <mat-toolbar color="primary">
   <div class="toolbar-content">
-    <div
-      class="menu"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      fxLayoutGap="1.5rem"
-    >
-      <span routerLink="" class="welcome-message"
-        >Welcome
-        {{
-          (accountService.currentUserSource | async) === null
-            ? "to Fanu's Blog!"
-            : accountService.currentUserSource?.value?.username
-        }}!</span
-      >
+    <div class="menu" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1.5rem">
+      <span routerLink="" class="welcome-message">Welcome
+        {{ (accountService.currentUserSource | async) === null
+        ? "to Fanu's Blog!"
+        : accountService.currentUserSource?.value?.username }}!</span>
       <div class="menu-buttons" fxLayout="row">
-        <button
-          mat-raised-button
-          color="accent"
-          *ngIf="accountService.currentUserSource | async"
-          routerLink="/posts"
-        >
+        <button mat-raised-button color="accent" *ngIf="accountService.currentUserSource | async" routerLink="/posts">
           Posts
         </button>
       </div>
     </div>
     <div class="login-buttons">
-      <button
-        mat-raised-button
-        color="basic"
-        *ngIf="(accountService.currentUserSource | async) === null"
-        routerLink="/login"
-      >
+      <button mat-raised-button color="basic" *ngIf="(accountService.currentUserSource | async) === null"
+        routerLink="/login">
         Login
       </button>
-      <button
-        mat-raised-button
-        color="warn"
-        *ngIf="accountService.currentUserSource | async"
-        (click)="logout()"
-      >
+      <button mat-raised-button color="warn" *ngIf="accountService.currentUserSource | async" (click)="logout()">
         Logout
       </button>
-      <button
-        mat-raised-button
-        color="accent"
-        *ngIf="(accountService.currentUserSource | async) === null"
-        routerLink="/register"
-      >
+      <button mat-raised-button color="accent" *ngIf="(accountService.currentUserSource | async) === null"
+        routerLink="/register">
         Register
       </button>
     </div>
