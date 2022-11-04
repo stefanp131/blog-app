@@ -11,8 +11,6 @@ public class CreateCommentaryDto
     [Required]
     [MaxLength(500)]
     public string Content { get; set; }
-    [Required]
-    public DateTime DateCreated { get; set; }
     public int CreatedById { get; set; }
     public int ForPostId { get; set; }
 

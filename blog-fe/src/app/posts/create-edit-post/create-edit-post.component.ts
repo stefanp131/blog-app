@@ -132,7 +132,6 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
   create() {
     const createEditFormValue: CreatePost = {
       ...this.createEditPostForm.value,
-      dateCreated: new Date(Date.now()),
     };
 
     createEditFormValue.content = JSON.stringify(

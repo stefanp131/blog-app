@@ -3,5 +3,4 @@ export interface CreateCommentary {
   content: string;
   createdById: number;
   forPostId: number;
-  dateCreated: Date;
 }

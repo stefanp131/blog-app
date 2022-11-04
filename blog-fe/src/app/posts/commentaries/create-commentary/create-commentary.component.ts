@@ -48,7 +48,6 @@ export class CreateCommentaryComponent implements OnInit {
   submit() {
     const createCommentaryFormValue: CreateCommentary = {
       ...this.createCommentaryForm.value,
-      dateCreated: new Date(Date.now()),
       forPostId: this.postId,
       createdById: this.accountService.currentUserSource.value.id,
     };

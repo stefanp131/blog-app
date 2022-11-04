@@ -14,7 +14,5 @@ public class CreatePostDto
     [Required]
     public string Content { get; set; }
     [Required]
-    public DateTime DateCreated { get; set; }
-    [Required]
     public string Category { get; set; }
 }
