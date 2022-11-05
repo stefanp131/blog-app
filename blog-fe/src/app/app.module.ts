@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

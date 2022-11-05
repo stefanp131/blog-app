@@ -19,6 +19,10 @@ export class CommentariesService {
     return this.http.get<Commentary[]>(`${this.serviceUrl}?postId=${postId}`);
   }
 
+  getCommentariesPerUser(userId: number): Observable<Commentary[]> {
+    return this.http.get<Commentary[]>(`${this.serviceUrl}?userId=${userId}`);
+  }
+
   createCommentaryForPost(commentary: CreateCommentary) {
     return this.http.post(`${this.serviceUrl}`, commentary);
   }

@@ -5,9 +5,12 @@
         {{ (accountService.currentUserSource | async) === null
         ? "to Fanu's Blog!"
         : accountService.currentUserSource?.value?.username }}!</span>
-      <div class="menu-buttons" fxLayout="row">
+      <div class="menu-buttons" fxLayout="row" fxLayoutGap="1.5rem">
         <button mat-raised-button color="accent" routerLink="/posts">
           Posts
+        </button>
+        <button mat-raised-button *ngIf="accountService.currentUserSource | async" color="accent" routerLink="/profile">
+          Profile
         </button>
       </div>
     </div>

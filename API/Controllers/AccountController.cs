@@ -3,6 +3,8 @@ using API.DTOs;
 using API.Interfaces;
 using AutoMapper;
 using DAL.Entities;
+using DAL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,13 +17,31 @@ public class AccountController : BaseApiController
     private readonly IMapper _mapper;
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AccountController(ITokenService tokenService, IMapper mapper, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+    public AccountController(ITokenService tokenService, IMapper mapper, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IUnitOfWork unitOfWork)
     {
         this._tokenService = tokenService;
         this._mapper = mapper;
         this._userManager = userManager;
         this._signInManager = signInManager;
+        _unitOfWork = unitOfWork;
+    }
+    
+    [Authorize()]
+    [HttpGet("{id}/picture")]
+    public async Task<ActionResult<string>> GetProfilePicture(int id)
+    {
+        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(
+            new {
+            ProfilePicture = user.ProfilePicture
+        });
     }
 
     [HttpPost("register")]
@@ -67,9 +87,21 @@ public class AccountController : BaseApiController
             Token = await this._tokenService.CreateToken(user),
         };
     }
+    
+    [Authorize()]
+    [HttpPatch("{id}")]
+    public async Task<ActionResult> UpdateProfilePicture(int id, [FromBody] UpdateProfilePictureForUser updateProfilePictureForUser)
+    {
+        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id);
+        _mapper.Map(updateProfilePictureForUser, user);
+        await _unitOfWork.Complete();
+
+        return Ok();
+    }
 
     private async Task<bool> UserExists(string username)
     {
         return await this._userManager.Users.AnyAsync(x => x.UserName == username.ToLower());
     }
+    
 }

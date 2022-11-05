@@ -1,5 +1,8 @@
 <mat-card *ngIf="commentary">
-  <mat-card-subtitle *ngIf="!showForm">
+  <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center" *ngIf="!showForm">
+    <img [src]="commentary.profilePicture ?? '../../../assets/empty-profile-pic.png'"
+      style="width: 5rem; height: 5rem; margin:1rem; object-fit: cover; border-radius: 50%"
+      alt="Profile Picture">
     <i>{{ commentary.createdBy }} wrote:</i>
   </mat-card-subtitle>
   <mat-card-content *ngIf="!showForm">

@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, ReplaySubject, Subject } from 'rxjs';
+import {
+  BehaviorSubject,
+  map,
+} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 
@@ -34,10 +37,11 @@ export class AccountService {
   }
 
   setCurrentUser(user: User) {
+    const token = this.getDecodedToken(user.token);
     user.roles = [];
-    const roles = this.getDecodedToken(user.token).role;
+    const roles = token.role;
     Array.isArray(roles) ? (user.roles = roles) : user.roles.push(roles);
-    user.id = this.getDecodedToken(user.token).nameid;
+    user.id = token.nameid;
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }
@@ -49,5 +53,17 @@ export class AccountService {
 
   getDecodedToken(token) {
     return JSON.parse(atob(token.split('.')[1]));
+  }
+
+  updateProfilePicture(id: number, profilePicture: string) {
+    return this.http.patch(`${this.baseUrl}account/${id.toString()}`, {
+      profilePicture: profilePicture,
+    });
+  }
+
+  getProfilePicture(id: number) {
+    return this.http.get(
+      this.baseUrl + 'account/' + this.currentUserSource.value.id + '/picture'
+    );
   }
 }

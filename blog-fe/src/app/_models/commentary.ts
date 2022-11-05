@@ -6,4 +6,6 @@ export interface Commentary {
   dateCreated: Date;
   lastUpdated: Date;
   createdBy: string;
+  forPost: string;
+  profilePicture: string;
 }
