@@ -5,6 +5,7 @@ using AutoMapper;
 using DAL.Entities;
 using DAL.Interfaces;
 using DAL.Specifications;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -76,6 +77,7 @@ public class CommentariesController : BaseApiController
         return Ok();
     }
     
+    [Authorize(Roles = "Admin")]
     [HttpPatch("{id}")]
     public async Task<ActionResult> ApproveCommentary(int id, [FromBody] ApproveCommentaryDto approveCommentaryDto)
     {

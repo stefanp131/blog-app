@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-[Authorize]
+[Authorize(Roles = "Admin")]
+
 public class PostsController : BaseApiController
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -24,6 +25,7 @@ public class PostsController : BaseApiController
         _mapper = mapper;
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<IReadOnlyCollection<PostDto>>> GetSimplePosts([FromQuery] bool commentaries)
     {
@@ -42,6 +44,7 @@ public class PostsController : BaseApiController
         return Ok(postDtos);
     }
 
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<ActionResult<PostDto>> GetPostById(int id)
     {
@@ -54,7 +57,6 @@ public class PostsController : BaseApiController
         return Ok(post);
     } 
     
-
     [HttpPost]
     public async Task<ActionResult> CreatePost([FromBody] CreatePostDto createPostDto)
     {

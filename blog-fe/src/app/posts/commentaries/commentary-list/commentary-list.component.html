@@ -1,4 +1,4 @@
-<app-create-commentary *ngIf="postId" [postId]="postId" (commentaryCreated)="getCommentariesPerPostList()">
+<app-create-commentary *ngIf="postId && accountService.currentUserSource.value" [postId]="postId" (commentaryCreated)="getCommentariesPerPostList()">
 </app-create-commentary>
 <mat-card *ngIf="postId">
   <mat-card-title>Commentaries</mat-card-title>

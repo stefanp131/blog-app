@@ -15,7 +15,7 @@ export class CommentaryListComponent implements OnInit {
 
   constructor(
     private commentariesService: CommentariesService,
-    private accountService: AccountService
+    public accountService: AccountService
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class CommentaryListComponent implements OnInit {
       .getCommentariesPerPost(this.postId)
       .pipe(
         map((list) => {
-          if (!this.accountService.currentUserSource.value.roles.includes('Admin')) {
+          if (!this.accountService.currentUserSource.value?.roles.includes('Admin')) {
             return list.filter((com) => com.approved);
           }
 
