@@ -5,24 +5,10 @@
   position: fixed;
   justify-content: center;
   border-radius: 10px 10px 0 0;
+
+  div {
+    span {
+      font-family: 'Bowlby One SC', cursive
+    }
+  }
 }
-
-@import url("https://fonts.googleapis.com/css?family=Bowlby+One+SC");
-@import '@angular/material/theming';
-
-
-$custom-typography: mat-typography-config(
-$font-family: 'Bowlby One SC, cursive',
-$headline: mat-typography-level(32px, 48px, 700),
-$body-1: mat-typography-level(16px, 24px, 500)
-);
-
-
-// Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
-@include mat-base-typography($custom-typography);
-
-// Override typography for a specific Angular Material components.
-@include mat-button-typography($custom-typography);
-
-// Override typography for all Angular Material, including mat-base-typography and all components.
-@include angular-material-typography($custom-typography);
