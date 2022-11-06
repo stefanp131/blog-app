@@ -15,6 +15,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProfileComponent } from './profile/profile.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

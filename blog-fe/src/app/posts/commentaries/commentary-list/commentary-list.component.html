@@ -1,18 +1,16 @@
-<app-create-commentary *ngIf="postId && accountService.currentUserSource.value" [postId]="postId" (commentaryCreated)="resetIndex(); getCommentariesPerPostList()">
+<app-create-commentary *ngIf="postId && accountService.currentUserSource.value" [postId]="postId"
+  (commentaryCreated)="resetIndex(); getCommentariesPerPostList()">
 </app-create-commentary>
-
-
-<div infinite-scroll [infiniteScrollDistance]="2" (scrolled)="onScroll()"
-  [infiniteScrollDisabled]="disableScroll"> 
-  <mat-card *ngIf="postId">
-    <mat-card-title>Commentaries</mat-card-title>
-    <mat-card-content>
-      <app-commentary *ngFor="let commentary of commentaries" [commentary]="commentary"
-        (commentaryUpdated)="resetIndex(); getCommentariesPerPostList()" (commentaryDeleted)="resetIndex(); getCommentariesPerPostList()">
-      </app-commentary>
-    </mat-card-content>
-    <mat-card-footer fxLayout="row" fxLayoutAlign="center center" *ngIf="postId && commentaries?.length === 0">
-      <span> No commentaries yet</span>
-    </mat-card-footer>
-  </mat-card>
-</div>
+<mat-card *ngIf="postId" infinite-scroll [infiniteScrollDistance]="2" (scrolled)="onScroll()"
+  [infiniteScrollDisabled]="disableScroll">
+  <mat-card-title>Commentaries</mat-card-title>
+  <mat-card-content>
+    <app-commentary *ngFor="let commentary of commentaries" [commentary]="commentary"
+      (commentaryUpdated)="resetIndex(); getCommentariesPerPostList()"
+      (commentaryDeleted)="resetIndex(); getCommentariesPerPostList()">
+    </app-commentary>
+  </mat-card-content>
+  <mat-card-footer fxLayout="row" fxLayoutAlign="center center" *ngIf="postId && commentaries?.length === 0">
+    <span> No commentaries yet</span>
+  </mat-card-footer>
+</mat-card>

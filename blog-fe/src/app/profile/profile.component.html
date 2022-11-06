@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="image">
   <mat-card-content fxLayout="column" fxLayoutAlign="center center">
     <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
     <input hidden (change)="onFileSelected($event)" #fileInput type="file">
@@ -11,33 +11,31 @@
 </mat-card>>
 
 
-<div infinite-scroll [infiniteScrollDistance]="2" (scrolled)="onScroll()"
-  [infiniteScrollDisabled]="disableScroll">
-  <mat-card *ngIf="commentaries">
-    <mat-card-title>Here are you approved commentaries on posts</mat-card-title>
-    <mat-card-content>
-      <mat-card *ngFor="let commentary of commentaries; trackBy:identify">
-        <mat-card-subtitle>
-          <i>On post <b>{{ commentary.forPost }}</b> {{ commentary.createdBy }} wrote:</i>
-        </mat-card-subtitle>
-        <mat-card-content>
-          <b>{{ commentary.title }}</b>
-          <br />
-          {{ commentary.content }}
-        </mat-card-content>
-        <mat-card-footer fxLayout="row" fxLayoutAlign="space-between center">
-          <div>
-            <i>Last updated @
-              {{ commentary.lastUpdated | date: "dd/MM/yyyy h:mm a" }}</i>
-            &nbsp;|&nbsp;
-            <i>Date created @
-              {{ commentary.dateCreated | date: "dd/MM/yyyy h:mm a" }}</i>
-          </div>
-        </mat-card-footer>
-      </mat-card>
-    </mat-card-content>
-    <mat-card-footer fxLayout="row" fxLayoutAlign="center center" *ngIf="commentaries?.length === 0">
-      <span> No commentaries yet</span>
-    </mat-card-footer>
-  </mat-card>
-</div>
+<mat-card class="comments" infinite-scroll [infiniteScrollDistance]="2" (scrolled)="onScroll()" [infiniteScrollDisabled]="disableScroll"
+  *ngIf="commentaries">
+  <mat-card-title>Here are you approved commentaries on posts</mat-card-title>
+  <mat-card-content>
+    <mat-card *ngFor="let commentary of commentaries; trackBy:identify">
+      <mat-card-subtitle>
+        <i>On post <b>{{ commentary.forPost }}</b> {{ commentary.createdBy }} wrote:</i>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <b>{{ commentary.title }}</b>
+        <br />
+        {{ commentary.content }}
+      </mat-card-content>
+      <mat-card-footer fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          <i>Last updated @
+            {{ commentary.lastUpdated | date: "dd/MM/yyyy h:mm a" }}</i>
+          &nbsp;|&nbsp;
+          <i>Date created @
+            {{ commentary.dateCreated | date: "dd/MM/yyyy h:mm a" }}</i>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </mat-card-content>
+  <mat-card-footer fxLayout="row" fxLayoutAlign="center center" *ngIf="commentaries?.length === 0">
+    <span> No commentaries yet</span>
+  </mat-card-footer>
+</mat-card>
