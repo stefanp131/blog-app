@@ -8,8 +8,7 @@
     <button type="button" mat-raised-button (click)="selectedFile && updateProfilePicture()"
       [disabled]="!selectedFile">Update Profile Picture</button>
   </mat-card-content>
-</mat-card>>
-
+</mat-card>
 
 <mat-card class="comments" infinite-scroll [infiniteScrollDistance]="2" (scrolled)="onScroll()" [infiniteScrollDisabled]="disableScroll"
   *ngIf="commentaries">
