@@ -11,7 +11,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Editor, schema, toDoc, Toolbar } from 'ngx-editor';
 import { Post } from 'src/app/_models/post';
-import { AccountService } from 'src/app/_services/account.service';
 import { PostsService } from '../posts-service/posts.service';
 import { Validators as NgxEditorValidators } from 'ngx-editor';
 import { UpdatePost } from 'src/app/_models/updatePost';
@@ -87,7 +86,7 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
         this.createEditPostForm = this.formBuilder.group({
           title: [this.editPost.title, Validators.required],
           category: [this.editPost.category, Validators.required],
-          summary: ['', Validators.required],
+          summary: [this.editPost.summary, Validators.required],
           content: [
             JSON.parse(this.editPost.content),
             [

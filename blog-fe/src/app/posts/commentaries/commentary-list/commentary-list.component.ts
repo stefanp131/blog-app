@@ -32,12 +32,12 @@ export class CommentaryListComponent implements OnInit {
       sort: 'dateCreatedAsc',
       search: '',
       postId: this.postId,
-      approved: this.accountService.currentUserSource.value.roles.includes('Admin') ? null : true
-    }
+      approved: !this.accountService.currentUserSource.value?.roles.includes('Admin')
+    };
 
     this.commentariesService
       .getCommentaries(params)
-      .subscribe(commentaries => {
+      .subscribe((commentaries) => {
         if (pageIndex) {
           if (commentaries['data'].length === 0) {
             this.disableScroll = true;
@@ -45,7 +45,7 @@ export class CommentaryListComponent implements OnInit {
             this.commentaries.push(...commentaries['data']);
           }
         } else this.commentaries = commentaries['data'];
-      })      
+      });
   }
   onScroll() {
     this.pageIndex++;
@@ -57,7 +57,7 @@ export class CommentaryListComponent implements OnInit {
     this.pageIndex = 1;
   }
 
-  identify(index, item){
-    return item.id; 
- }
+  identify(index, item) {
+    return item.id;
+  }
 }
