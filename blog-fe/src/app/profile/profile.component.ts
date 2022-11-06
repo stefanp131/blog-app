@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommentariesService } from '../posts/commentaries/commentaries-service/commentaries.service';
+import { CommentariesSpecParams } from '../_models/commentariesSpecParams';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -13,6 +14,9 @@ export class ProfileComponent implements OnInit {
   imageSrc;
   commentaries;
 
+  pageIndex = 1;
+  pageSize = 3;
+
   constructor(
     public accountService: AccountService,
     private commentariesService: CommentariesService,
@@ -20,10 +24,19 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const params: CommentariesSpecParams = {
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize,
+      sort: 'dateCreatedAsc',
+      search: '',
+      userId: this.accountService.currentUserSource.value.id,
+      approved: true
+    }
+
     this.commentariesService
-      .getCommentariesPerUser(this.accountService.currentUserSource.value.id)
+      .getCommentaries(params)
       .subscribe((commentaries) => {
-        this.commentaries = commentaries.filter((c) => c.approved);
+        this.commentaries = commentaries['data'];
       });
 
     this.accountService

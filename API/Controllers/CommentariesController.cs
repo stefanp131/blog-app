@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.DTOs;
+using API.Helpers;
 using AutoMapper;
 using DAL.Entities;
 using DAL.Interfaces;
 using DAL.Specifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace API.Controllers;
 
@@ -24,27 +26,27 @@ public class CommentariesController : BaseApiController
     }
     
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyCollection<CommentaryDto>>> GetCommentaries([FromQuery] int? postId,[FromQuery] int? userId)
+    public async Task<ActionResult<IReadOnlyCollection<CommentaryDto>>> GetCommentaries([FromQuery] CommentariesSpecParams commentariesSpecParams)
     {
         IReadOnlyCollection<Commentary> commentaries;
         IReadOnlyCollection<CommentaryDto> commentaryDtos;
 
-        if (postId.HasValue && userId.HasValue)
+        if (commentariesSpecParams.PostId.HasValue && commentariesSpecParams.UserId.HasValue)
             return NoContent();
         
-        if (postId.HasValue)
+        if (commentariesSpecParams.PostId.HasValue)
         {
-            commentaries = await _commentaries.ListAsync(new CommentariesPerPost(postId.Value));
+            commentaries = await _commentaries.ListAsync(new CommentariesPerPost(commentariesSpecParams));
             commentaryDtos = _mapper.Map<IReadOnlyCollection<CommentaryDto>>(commentaries);
 
-            return Ok(commentaryDtos);
+            return Ok(new Pagination<CommentaryDto>(commentariesSpecParams.PageIndex, commentariesSpecParams.PageSize, commentaryDtos));
 
-        } else if (userId.HasValue)
+        } else if (commentariesSpecParams.UserId.HasValue)
         {
-            commentaries = await _commentaries.ListAsync(new CommentariesPerUser(userId.Value));
+            commentaries = await _commentaries.ListAsync(new CommentariesPerUser(commentariesSpecParams));
             commentaryDtos = _mapper.Map<IReadOnlyCollection<CommentaryDto>>(commentaries);
 
-            return Ok(commentaryDtos);
+            return Ok(new Pagination<CommentaryDto>(commentariesSpecParams.PageIndex, commentariesSpecParams.PageSize, commentaryDtos));
         }
 
         commentaries = await _commentaries.ListAllAsync();
