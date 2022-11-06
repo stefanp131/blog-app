@@ -18,7 +18,7 @@ export class CommentariesService {
 
   getCommentaries(
     commentariesSpecParams: CommentariesSpecParams
-  ): Observable<Commentary[]> {
+  ): Observable<any> {
     let params = new HttpParams();
 
     params = params.append('pageIndex', commentariesSpecParams.pageIndex);
@@ -35,6 +35,10 @@ export class CommentariesService {
 
     if (commentariesSpecParams.userId) {
       params = params.append('userId', commentariesSpecParams.userId);
+    }
+    
+    if (commentariesSpecParams.approved) {
+      params = params.append('approved', commentariesSpecParams.approved);
     }
 
     return this.http.get<Commentary[]>(`${this.serviceUrl}`, { params: params });

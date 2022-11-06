@@ -12,7 +12,7 @@ public class CommentariesSpecParams
         set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
     }
 
-    public bool? Approved = true;
+    public bool? Approved { get; set; }
     public int? PostId { get; set; }
     public int? UserId { get; set; }
     public string Sort { get; set; }

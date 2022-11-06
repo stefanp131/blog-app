@@ -13,6 +13,7 @@ import { config } from './ngx-editor-config/config';
 import { CommentaryListComponent } from './commentaries/commentary-list/commentary-list.component';
 import { CommentaryComponent } from './commentaries/commentary/commentary.component';
 import { CreateCommentaryComponent } from './commentaries/create-commentary/create-commentary.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 const routes: Routes = [
   {
@@ -44,6 +45,7 @@ const routes: Routes = [
     NgMaterialModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    InfiniteScrollModule,
     NgxEditorModule.forChild(config),
     RouterModule.forChild(routes),
   ],

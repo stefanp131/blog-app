@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { filter, map, Observable } from 'rxjs';
 import { CommentariesSpecParams } from 'src/app/_models/commentariesSpecParams';
 import { Commentary } from 'src/app/_models/commentary';
 import { AccountService } from 'src/app/_services/account.service';
@@ -12,9 +11,10 @@ import { CommentariesService } from '../commentaries-service/commentaries.servic
 })
 export class CommentaryListComponent implements OnInit {
   @Input() postId: number;
-  commentaries$: Observable<Commentary[]>;
+  commentaries: Commentary[];
   pageIndex = 1;
   pageSize = 3;
+  disableScroll: boolean;
 
   constructor(
     private commentariesService: CommentariesService,
@@ -25,25 +25,39 @@ export class CommentaryListComponent implements OnInit {
     this.getCommentariesPerPostList();
   }
 
-  public getCommentariesPerPostList() {
+  public getCommentariesPerPostList(pageIndex?: number) {
     const params: CommentariesSpecParams = {
       pageIndex: this.pageIndex,
       pageSize: this.pageSize,
       sort: 'dateCreatedAsc',
       search: '',
-      postId: this.postId
+      postId: this.postId,
+      approved: this.accountService.currentUserSource.value.roles.includes('Admin') ? null : true
     }
 
-    this.commentaries$ = this.commentariesService
+    this.commentariesService
       .getCommentaries(params)
-      .pipe(
-        map((list) => {
-          if (!this.accountService.currentUserSource.value?.roles.includes('Admin')) {
-            return list.filter((com) => com.approved);
+      .subscribe(commentaries => {
+        if (pageIndex) {
+          if (commentaries['data'].length === 0) {
+            this.disableScroll = true;
+          } else {
+            this.commentaries.push(...commentaries['data']);
           }
-
-          return list;
-        })
-      );
+        } else this.commentaries = commentaries['data'];
+      })      
   }
+  onScroll() {
+    this.pageIndex++;
+    this.getCommentariesPerPostList(this.pageIndex);
+  }
+
+  resetIndex() {
+    this.disableScroll = false;
+    this.pageIndex = 1;
+  }
+
+  identify(index, item){
+    return item.id; 
+ }
 }

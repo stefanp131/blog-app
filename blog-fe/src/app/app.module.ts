@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProfileComponent } from './profile/profile.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ProfileComponent } from './profile/profile.component';
     HttpClientModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    InfiniteScrollModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

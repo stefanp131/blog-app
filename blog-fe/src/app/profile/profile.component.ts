@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
   selectedFile: any = null;
   imageSrc;
   commentaries;
+  disableScroll;
 
   pageIndex = 1;
   pageSize = 3;
@@ -24,21 +25,12 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const params: CommentariesSpecParams = {
-      pageIndex: this.pageIndex,
-      pageSize: this.pageSize,
-      sort: 'dateCreatedAsc',
-      search: '',
-      userId: this.accountService.currentUserSource.value.id,
-      approved: true
-    }
+    this.getCommentaries();
 
-    this.commentariesService
-      .getCommentaries(params)
-      .subscribe((commentaries) => {
-        this.commentaries = commentaries['data'];
-      });
+    this.getProfilePicture();
+  }
 
+  private getProfilePicture() {
     this.accountService
       .getProfilePicture(this.accountService.currentUserSource.value.id)
       .subscribe((profilePic) => {
@@ -46,6 +38,38 @@ export class ProfileComponent implements OnInit {
           profilePic['profilePicture'] ?? '../../assets/empty-profile-pic.png';
       });
   }
+
+  private getCommentaries(pageIndex?: number) {
+    const params: CommentariesSpecParams = {
+      pageIndex: pageIndex ?? this.pageIndex,
+      pageSize: this.pageSize,
+      sort: 'dateCreatedAsc',
+      search: '',
+      userId: this.accountService.currentUserSource.value.id,
+      approved: true,
+    };
+
+    this.commentariesService
+      .getCommentaries(params)
+      .subscribe((commentaries) => {
+        if (pageIndex) {
+          if (commentaries['data'].length === 0) {
+            this.disableScroll = true;
+          } else {
+            this.commentaries.push(...commentaries['data']);
+          }
+        } else this.commentaries = commentaries['data'];
+      });
+  }
+
+  onScroll() {
+    this.pageIndex++;
+    this.getCommentaries(this.pageIndex);
+  }
+
+  identify(index, item){
+    return item.id; 
+ }
 
   updateProfilePicture() {
     this.accountService
