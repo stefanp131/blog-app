@@ -42,7 +42,7 @@ mat-expansion-panel {
 
 
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
-@import '~@angular/material/theming';
+@import '@angular/material/theming';
 
 
 $custom-typography: mat-typography-config(

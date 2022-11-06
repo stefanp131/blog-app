@@ -16,6 +16,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProfileComponent } from './profile/profile.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FooterComponent } from './footer/footer.component';
+import { LoaderComponent } from './loader/loader/loader.component';
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { FooterComponent } from './footer/footer.component';
     HomeComponent,
     ProfileComponent,
     FooterComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +43,7 @@ import { FooterComponent } from './footer/footer.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })
