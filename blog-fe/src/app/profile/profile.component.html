@@ -26,10 +26,10 @@
       <mat-card-footer fxLayout="row" fxLayoutAlign="end center">
         <div>
           <i>Last updated @
-            {{ commentary.lastUpdated | date: "dd/MM/yyyy h:mm a" }}</i>
+            {{ commentary.lastUpdated | utcDateToLocal }}</i>
           &nbsp;|&nbsp;
           <i>Date created @
-            {{ commentary.dateCreated | date: "dd/MM/yyyy h:mm a" }}</i>
+            {{ commentary.dateCreated | utcDateToLocal }}</i>
         </div>
       </mat-card-footer>
     </mat-card>
