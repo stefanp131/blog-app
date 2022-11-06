@@ -13,7 +13,7 @@ export class CommentaryListComponent implements OnInit {
   @Input() postId: number;
   commentaries: Commentary[];
   pageIndex = 1;
-  pageSize = 3;
+  pageSize = 5;
   disableScroll: boolean;
 
   constructor(

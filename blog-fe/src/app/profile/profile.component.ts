@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   disableScroll;
 
   pageIndex = 1;
-  pageSize = 3;
+  pageSize = 5;
 
   constructor(
     public accountService: AccountService,
