@@ -6,5 +6,6 @@ The project is a blog and has the following features:
 - you can create comments and edit them if you sign in.
 - ability to moderate comments by an admin.
 - create a profile and upload images for your profile picture.
+- infinite scrolling.
 
 The project was built with .NET 6 - Web API, ASP.NET Identity, EF Core, SQLite - and Angular 14 - Angular material, RxJS, HTML 5, SCSS.
