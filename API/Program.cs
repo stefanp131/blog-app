@@ -28,10 +28,16 @@ app.UseCors(x => x.AllowAnyHeader()
     .AllowCredentials()
     .WithOrigins("http://localhost:4200"));
 
+app.UseRouting();
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapFallbackToController("Index", "Fallback");
+});
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;

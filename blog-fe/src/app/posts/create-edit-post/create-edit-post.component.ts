@@ -73,7 +73,7 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
         '',
         [
           NgxEditorValidators.required(schema),
-          NgxEditorValidators.maxLength(2000, schema),
+          NgxEditorValidators.maxLength(4000, schema),
         ],
       ],
     });
@@ -91,7 +91,7 @@ export class CreateEditPostComponent implements OnInit, OnDestroy {
             JSON.parse(this.editPost.content),
             [
               NgxEditorValidators.required(schema),
-              NgxEditorValidators.maxLength(2000, schema),
+              NgxEditorValidators.maxLength(4000, schema),
             ],
           ],
         });

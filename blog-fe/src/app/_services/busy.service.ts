@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { LoaderService } from '../loader/loader.service';
 
 @Injectable({

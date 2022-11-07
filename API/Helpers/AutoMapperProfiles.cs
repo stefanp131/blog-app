@@ -16,15 +16,15 @@ public class AutoMapperProfiles : Profile
             .ForMember(d => d.ForPost, o => o.MapFrom((src => src.ForPost.Title)))
             .ForMember(d => d.ProfilePicture, o => o.MapFrom((src => src.CreatedBy.ProfilePicture)));
         CreateMap<CreatePostDto, Post>()
-            .ForMember(d => d.DateCreated, o => o.MapFrom((src => DateTime.Now)))
-            .ForMember(d => d.LastUpdated, o => o.MapFrom((src => DateTime.Now)));
+            .ForMember(d => d.DateCreated, o => o.MapFrom((src => DateTime.UtcNow)))
+            .ForMember(d => d.LastUpdated, o => o.MapFrom((src => DateTime.UtcNow)));
         CreateMap<UpdatePostDto, Post>()
-            .ForMember(d => d.LastUpdated, o => o.MapFrom((src => DateTime.Now)));
+            .ForMember(d => d.LastUpdated, o => o.MapFrom((src => DateTime.UtcNow)));
         CreateMap<CreateCommentaryDto, Commentary>()
-            .ForMember(d => d.DateCreated, o => o.MapFrom((src => DateTime.Now)))
-            .ForMember(d => d.LastUpdated, o => o.MapFrom((src => DateTime.Now)));
+            .ForMember(d => d.DateCreated, o => o.MapFrom((src => DateTime.UtcNow)))
+            .ForMember(d => d.LastUpdated, o => o.MapFrom((src => DateTime.UtcNow)));
         CreateMap<UpdateCommentaryDto, Commentary>()
-            .ForMember(d => d.LastUpdated, o => o.MapFrom((src => DateTime.Now)));
+            .ForMember(d => d.LastUpdated, o => o.MapFrom((src => DateTime.UtcNow)));
         CreateMap<ApproveCommentaryDto, Commentary>();
         CreateMap<UpdateProfilePictureForUser, AppUser>();
 

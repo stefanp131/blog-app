@@ -6,9 +6,9 @@
       <i>Category: {{ post.category }}</i>
     </div>
     <div>
-      <i>Last updated @ {{ post.lastUpdated | date: "dd/MM/yyyy h:mm a" }}</i>
+      <i>Last updated @ {{ post.lastUpdated | utcDateToLocal }}</i>
       &nbsp;|&nbsp;
-      <i>Date created @ {{ post.dateCreated | date: "dd/MM/yyyy h:mm a" }}</i>
+      <i>Date created @ {{ post.dateCreated | utcDateToLocal }}</i>
     </div>
   </mat-card-footer>
 </mat-card>
