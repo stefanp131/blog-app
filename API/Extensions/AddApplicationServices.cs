@@ -19,7 +19,7 @@ public static class ApplicationServiceExtensions
         services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
         services.AddDbContext<DataContext>(options =>
         {
-            options.UseSqlite(config.GetConnectionString("DefaultConnection"));
+            options.UseNpgsql(config.GetConnectionString("ProdConnection"));
 
         });
         return services;
