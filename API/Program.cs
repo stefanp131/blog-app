@@ -30,7 +30,7 @@ var app = builder.Build();
 
 app.UseForwardedHeaders();
 
-if (builder.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
@@ -51,11 +51,21 @@ app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
+if (app.Environment.IsDevelopment())
 {
-    endpoints.MapControllers();
-    endpoints.MapFallbackToController("Index", "Fallback");
-});
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+    });
+}
+else
+{
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+        endpoints.MapFallbackToController("Index", "Fallback");
+    });
+}
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
