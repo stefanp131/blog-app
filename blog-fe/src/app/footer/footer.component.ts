@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BrotherService } from '../_services/brother.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  message: string;
+
+  constructor(private brother: BrotherService) { }
 
   ngOnInit(): void {
+    this.brother.getMessage().subscribe(messageFromHeader => this.message = messageFromHeader);
   }
 
 }
